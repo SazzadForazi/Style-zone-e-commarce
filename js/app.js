@@ -9,9 +9,6 @@ const showProducts = (products) => {
   const allProducts = products.map((pd) => pd);
   for (const product of allProducts) {
     const images = product.image;
-
-    // console.log(images);
-
     const div = document.createElement("div");
     div.classList.add("product");
     div.innerHTML = `<div class="single-product">
@@ -21,9 +18,11 @@ const showProducts = (products) => {
       <h3>${product.title}</h3>
       <p>Category: ${product.category}</p>
       <h2>Price: $ ${product.price}</h2>
+      <P>Count: ${product.rating.count}  Rating: ${product.rating.rate}</P>
       <button onclick="addToCart(${product.id},${product.price})" id="addToCart-btn" class="buy-now btn btn-success">add to cart</button>
       <button id="details-btn" class="btn btn-danger">Details</button></div>
       `;
+    // <button onclick="addRatting()">Review</button>
     document.getElementById("all-products").appendChild(div);
   }
 };
@@ -56,13 +55,15 @@ const updatePrice = (id, value) => {
   const total = convertedOldPrice + convertPrice;
   // console.log(total);
 
-  document.getElementById(id).innerText = Math.round(total);
+  // document.getElementById(id).innerText = Math.round(total);
+  document.getElementById(id).innerText = total.toFixed(2);
   updateTotal();
 };
 
 // set innerText function
 const setInnerText = (id, value) => {
   document.getElementById(id).innerText = Math.round(value);
+  // document.getElementById(id).innerText = value.toFixed(2);
   updateTotal();
 };
 
@@ -90,7 +91,7 @@ const updateTotal = () => {
 
 
 
-  document.getElementById("total").innerText = grandTotal;
+  document.getElementById("total").innerText = grandTotal.toFixed(2);
 };
 
 loadProducts();
